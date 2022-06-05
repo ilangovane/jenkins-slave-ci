@@ -1,0 +1,37 @@
+version: '3'
+services:
+  jenkins-master:
+    image: jenkins/jenkins
+    container_name: jenkins
+    restart: always
+    environment:
+      - TZ="Europe/Paris"
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+      - "2200:22"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+  slave-debian-11:
+    image: debian:11
+    container_name: debian_11
+    tty: true
+    restart: always
+    environment:
+      - TZ="Europe/Paris"
+    ports:
+      - "9000:80"
+      - "2500:22"
+  slave-debian-10:
+    image: debian:10
+    container_name: debian_10
+    tty: true
+    restart: always
+    environment:
+      - TZ="Europe/Paris"
+    ports:
+      - "9001:80"
+      - "2501:22"
+
+volumes:
+  jenkins_home:
