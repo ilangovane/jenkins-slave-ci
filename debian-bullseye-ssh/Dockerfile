@@ -14,7 +14,7 @@ RUN echo 'Acquire::https {  Verify-Peer "false"; Verify-Host "false"; }' > /etc/
 
 # Install packages
 RUN apt update && \
-    apt install -y dos2unix curl wget vim nano openssh-server openssh-client ca-certificates locales git default-jdk libcap2-bin sudo
+    apt install -y dos2unix curl wget vim nano openssh-server openssh-client ca-certificates locales git default-jdk libcap2-bin sudo maven
 
 # Configuration SSHD
 RUN mkdir -p /run/sshd
