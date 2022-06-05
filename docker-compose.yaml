@@ -24,7 +24,6 @@ services:
       - "8200:80"
       - "2200:22"
 
-
 volumes:
   jenkins_home:
   maven_home:
