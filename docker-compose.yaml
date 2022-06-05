@@ -12,6 +12,10 @@ services:
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
+    networks:
+      production:
+        ipv4_address: 172.10.0.2
+
   slave-debian-11:
     container_name: slave-debian-11
     hostname: slave-debian-11
@@ -28,7 +32,18 @@ services:
     ports:
       - "8200:80"
       - "2200:22"
+    networks:
+      production:
+        ipv4_address: 172.10.0.3
 
 volumes:
   jenkins_home:
   maven_home:
+
+networks:
+  production:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.10.0.0/16
+         gateway: 172.10.0.1
