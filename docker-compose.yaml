@@ -16,7 +16,12 @@ services:
     container_name: slave-debian-11
     hostname: slave-debian-11
     tty: true
-    build: debian-bullseye-ssh
+    build: 
+      context: debian-bullseye-ssh
+      args:
+        - ROOT_PASSWORD=root
+        - JENKINS_LINUX_USER=jenkins
+        - JENKINS_LINUX_PASSWORD=jenkins
     restart: always
     environment:
       - TZ="Europe/Paris"
