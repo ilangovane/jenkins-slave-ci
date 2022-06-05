@@ -63,6 +63,16 @@ services:
       deployer:
         ipv4_address: 174.10.0.3
 
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    image: nginx
+    ports:
+    - "9000:80"
+    networks:
+      production:
+        ipv4_address: 172.10.0.5
+
 
 volumes:
   jenkins_home:
