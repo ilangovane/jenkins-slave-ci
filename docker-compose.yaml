@@ -15,6 +15,11 @@ services:
     networks:
       production:
         ipv4_address: 172.10.0.2
+      integration:
+        ipv4_address: 173.10.0.2
+      deployer:
+        ipv4_address: 174.10.0.2
+
 
   slave-debian-11:
     container_name: slave-debian-11
@@ -35,6 +40,29 @@ services:
     networks:
       production:
         ipv4_address: 172.10.0.3
+      integration:
+        ipv4_address: 173.10.0.3
+
+  deployer-debian-11:
+    container_name: deployer-debian-11
+    hostname: deployer-debian-11
+    tty: true
+    build: 
+      context: debian-bullseye-ssh
+      args:
+        - ROOT_PASSWORD=root
+        - JENKINS_LINUX_USER=deployer
+        - JENKINS_LINUX_PASSWORD=deployer
+    restart: always
+    environment:
+      - TZ="Europe/Paris"
+    ports:
+      - "8201:80"
+      - "2201:22"
+    networks:
+      deployer:
+        ipv4_address: 174.10.0.3
+
 
 volumes:
   jenkins_home:
@@ -47,3 +75,15 @@ networks:
      config:
        - subnet: 172.10.0.0/16
          gateway: 172.10.0.1
+  integration:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 173.10.0.0/16
+         gateway: 173.10.0.1
+  deployer:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 174.10.0.0/16
+         gateway: 174.10.0.1  
