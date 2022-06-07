@@ -80,6 +80,8 @@ services:
       context: centos-7-ssh
       args:
         - ROOT_PASSWORD=root
+        - JENKINS_LINUX_USER=jenkins
+        - JENKINS_LINUX_PASSWORD=jenkins
     ports:
     - "2202:22"
     networks:
