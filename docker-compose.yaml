@@ -73,10 +73,22 @@ services:
       production:
         ipv4_address: 172.10.0.5
 
+  slave-centos-7:
+    container_name: slave-centos-7
+    hostname: slave-centos-7
+    build: 
+      context: centos-7-ssh
+      args:
+        - ROOT_PASSWORD=root
+    ports:
+    - "2202:22"
+    networks:
+      production:
+        ipv4_address: 172.10.0.6
+
 
 volumes:
   jenkins_home:
-  maven_home:
 
 networks:
   production:
