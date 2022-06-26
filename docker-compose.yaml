@@ -20,7 +20,6 @@ services:
       deployer:
         ipv4_address: 174.10.0.2
 
-
   slave-debian-11:
     container_name: slave-debian-11
     hostname: slave-debian-11
@@ -62,7 +61,7 @@ services:
     networks:
       deployer:
         ipv4_address: 174.10.0.3
-
+  
   nginx:
     container_name: nginx
     hostname: nginx
@@ -88,6 +87,31 @@ services:
       production:
         ipv4_address: 172.10.0.6
 
+  debian-bullseye_mvn:
+    container_name: debian-bullseye_mvn
+    hostname: debian-bullseye_mvn
+    tty: true
+    build: 
+      context: debian-bullseye_mvn-3.6.3
+    restart: always
+    environment:
+      - TZ="Europe/Paris"
+    networks:
+      integration:
+        ipv4_address: 173.10.0.4
+
+  debian-buster_mvn:
+    container_name: debian-buster_mvn
+    hostname: debian-buster_mvn
+    tty: true
+    build: 
+      context: debian-buster_mvn-3.6.0
+    restart: always
+    environment:
+      - TZ="Europe/Paris"
+    networks:
+      integration:
+        ipv4_address: 173.10.0.5
 
 volumes:
   jenkins_home:
